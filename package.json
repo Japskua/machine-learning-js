@@ -1,0 +1,38 @@
+{
+  "name": "machine-learning-js",
+  "version": "0.0.1",
+  "description": "A collection of machine learning algorithms for javascript",
+  "main": "index.js",
+  "bin": {
+    "machine-learning-js": "helpers.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "expect.js": "^0.3.1",
+    "underscore": "^1.6.0",
+    "mathjs": "^0.25.0",
+    "assert": "^1.1.1"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.3"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Japskua/machine-learning-js.git"
+  },
+  "keywords": [
+    "machine",
+    "learning"
+  ],
+  "author": "Janne Parkkila",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Japskua/machine-learning-js/issues"
+  },
+  "homepage": "https://github.com/Japskua/machine-learning-js"
+}
