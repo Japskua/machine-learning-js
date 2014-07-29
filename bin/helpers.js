@@ -56,6 +56,13 @@ function probability(value, values) {
     return instances/total;
 }
 
+/**
+ * Creates a ID3 decission tree, populating from top-down with maximum information gain at each leaf
+ * @param {List} dataSet The complete dataset to build the tree from
+ * @param {String} target The target that we are optimizing the tree for
+ * @param {List} features The list of all the features to use in the creation of the decission tree
+ * @returns {*}
+ */
 function createTree(dataSet, target, features) {
     // Get the targets from the data set & make sure the targets are all unique
     var targets = _.unique(_.pluck(dataSet, target));
@@ -124,11 +131,11 @@ function createTree(dataSet, target, features) {
 }
 
 /**
- * Calculates the information gain of a given dataset with target and features
+ * Calculates the information gain of a given feature in the dataset when searching for target value.
  * @param {List} dataSet A list containing the whole dataset to check
- * @param {*} target The target to search for
- * @param {*} feature The feature to use in the search
- * @returns {number} The amount of information gain
+ * @param {String} target The target we are trying to find the information gain for
+ * @param {String} feature The feature to use in the calculation of information gain
+ * @returns {Number} The amount of information gain
  */
 function gain(dataSet, target, feature) {
     // First, Get all the unique the values of each of the features
@@ -154,6 +161,13 @@ function gain(dataSet, target, feature) {
 
 }
 
+/**
+ * Gets the feature from the given dataset that provides maximum information gain
+ * @param {List} dataSet The list containing all the given data
+ * @param {String} target The target to which we want to find the best match
+ * @param {List} features The list of features to test for the maximum information gain
+ * @returns {String} Returns the name of the feature that provides the best information gain
+ */
 function maxGain(dataSet, target, features) {
 
     // Return the feature that brings the maximum gain from the complete data set
