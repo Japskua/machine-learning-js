@@ -5,6 +5,7 @@
 var assert = require("assert");
 var expect = require("expect.js");
 var helpers = require('./../bin/helpers.js');
+var _ = require("underscore");
 
 describe("helpers.js", function() {
 
@@ -34,10 +35,6 @@ describe("helpers.js", function() {
             expect(helpers.probability(0, [1,2,3,40])).to.eql(0);
 
             // Some error checks
-            // Not being a number
-            expect( function() {
-                helpers.probability("Afs", [0,2,3,40]) })
-                .to.throwError(new Error("Value is not a number!"));
 
             // Case of not having a list
             expect( function() {
@@ -50,9 +47,46 @@ describe("helpers.js", function() {
 
             // Some entropy tests
             expect(helpers.entropy([1,2,3,4,3,2])).to.eql(1.9182958340544893);
+            // Empty entropy list
+            expect(helpers.entropy([])).to.eql(0);
+            // Entropy should be 0
+            expect(helpers.entropy([1])).to.eql(0);
+            // Entropy should be 1
+            expect(helpers.entropy([1, 2])).to.eql(1);
 
 
         });
+
+        var features = ["color", "shape"];
+        var dataSet =
+            [
+                {"color":"blue", "shape":"square", "liked":false},
+                {"color":"red", "shape":"square", "liked":false},
+                {"color":"blue", "shape":"circle", "liked":true},
+                {"color":"red", "shape":"circle", "liked":true},
+                {"color":"blue", "shape":"hexagon", "liked":false},
+                {"color":"red", "shape":"hexagon", "liked":false},
+                {"color":"yellow", "shape":"hexagon", "liked":true},
+                {"color":"yellow", "shape":"circle", "liked":true}
+
+            ];
+
+
+        it("Should test the information gain of the helpers", function() {
+
+            var target = "liked";
+
+            // Check that we get the proper values for separate gains
+            expect(helpers.gain(dataSet, target, "color")).to.eql(0.31127812445913283);
+            expect(helpers.gain(dataSet, target, "shape")).to.eql(0.6556390622295665);
+            expect(helpers.gain(dataSet, target, "liked")).to.eql(1);
+
+            // And then test some on maximum gain
+            expect(helpers.maxGain(dataSet, target, features)).to.eql("shape");
+
+            expect(helpers.maxGain(dataSet, "shape", features)).to.eql("shape");
+        });
+
 
     });
 
