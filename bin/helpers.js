@@ -100,9 +100,9 @@ function createTree(dataSet, target, features) {
     // Now, start creating a node
     var node = {
         name : bestFeature,
-        alias : bestFeature + randomTag(),
-        type : "feature"
+        alias : bestFeature + randomTag()
     };
+    node.type = "feature";
 
     // Then, populate the values for the node in question
     node.values = _.map(possibleValues, function(value) {
@@ -120,7 +120,7 @@ function createTree(dataSet, target, features) {
         };
 
         // And continue creating the tree from here, using the child as the root
-        childNode.chilld = createTree(newSet, target, remainingFeatures);
+        childNode.child = createTree(newSet, target, remainingFeatures);
         // Then return the child node
         return childNode;
 

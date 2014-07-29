@@ -3,7 +3,6 @@
  */
 
 var  _ = require('underscore');
-var math = require('mathjs');
 var helpers = require('./helpers.js');
 
 
@@ -62,7 +61,7 @@ ID3.prototype = {
 
         // Once we hit the root.type === "result"
         // Return the value
-        return node.value;
+        return node.val;
 
     }, // End of predict()
 

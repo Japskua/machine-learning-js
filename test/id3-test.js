@@ -61,9 +61,15 @@ describe("ID3", function() {
             var sample = dataSet[0];
             console.log("Starting to predict", sample);
             var predictedClass = id3.predict(sample);
-            //var actualClass = dataSet["liked"];
-            //expect(predictedClass).to.eql(actualClass);
+            var actualClass = sample["liked"];
 
+            console.log("predictedClass is:", predictedClass);
+            console.log("And actual class is:", actualClass);
+
+            expect(predictedClass).to.eql(actualClass);
+
+            var accuracy = id3.evaluate(dataSet);
+            expect(accuracy).to.eql(1);
 
         });
 
